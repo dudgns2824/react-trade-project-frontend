@@ -7,13 +7,12 @@ src/
 │   │   ├── dto/                 # DTO 모음
 │   │   │   ├── request/         # 요청 DTO
 │   │   │   ├── response/        # 응답 DTO
-│   │   ├── entity/              # 도메인 엔티티
 │   │   ├── enumeration/         # Enum 모음
-│   │   ├── port/                # 포트
+│   │   ├── port/                # 포트 (추상화된 비즈니스 로직 인터페이스)
 │   │   │   ├── in/              
 │   │   │   │   ├── query/       # Query 인터페이스
 │   │   │   │   ├── command/     # Command 인터페이스
-│   │   │   ├── out/             
+│   │   │   ├── out/             # Repository 인터페이스
 │   │   │   │   ├── query/       # Query Repository 인터페이스
 │   │   │   │   ├── command/     # Command Repository 인터페이스
 │   │   ├── service/             # 비즈니스 로직 구현체
@@ -21,15 +20,14 @@ src/
 │   │   │   ├── command/
 │
 │── application/                  # 상태 관리 및 애플리케이션 서비스
-│   ├── store/                     # 상태 관리 (Zustand, Redux 등)
+│   ├── store/                     # Zustand, Redux 등 상태 관리
 │   ├── hooks/                     # 커스텀 훅 (데이터 가져오기 등)
 │   ├── providers/                 # Context Provider 모음
 │
 │── infrastructure/                 # 인프라 계층 (API, Storage, WebSocket)
 │   ├── 도메인 명/                  
-│   │   ├── repository/            # Repository 구현체 (API 통신)
+│   │   ├── api/                   # API 호출 로직
 │   │   ├── storage/               # LocalStorage, IndexedDB 등의 저장소
-│   │   ├── external-api/          # 외부 API 연동
 │   │   ├── websocket/             # WebSocket 관련 모듈
 │
 │── presentation/                   # UI 계층
@@ -37,11 +35,6 @@ src/
 │   ├── pages/                      # 페이지 단위 컴포넌트
 │   ├── hooks/                      # UI 관련 훅 (예: useModal)
 │   ├── layouts/                    # 페이지 레이아웃
-│
-│── interface/                      # 어댑터 계층 (컨트롤러 역할)
-│   ├── 도메인 명/                  
-│   │   ├── rest-api/               # REST API 엔드포인트
-│   │   ├── websocket/              # WebSocket 엔드포인트
 │
 │── common/                         # 공통 유틸리티
 │   ├── logger/                     # 로깅 유틸
