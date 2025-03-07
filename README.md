@@ -2,6 +2,7 @@
 
 ```
 /src
+ ├── /store        # 전역 상태 관리 (아마 redux 쓸듯)
  ├── /presentation        # UI 및 컴포넌트 계층
  │    ├── /components     # 재사용 가능한 UI 컴포넌트
  │    ├── /pages          # 라우트별 페이지 컴포넌트
@@ -58,7 +59,7 @@ example) userRole.ts
 database는 한 단어이므로 database.ts      
 ```
 
-### 포트와 상속받아 사용하는 구현체에는 CQRS 패턴을 적용 권고
+### CQRS 패턴을 적용 권고
 ```
 CQRS(Command Query Responsibility Segregation) 패턴을 적용.      
 
