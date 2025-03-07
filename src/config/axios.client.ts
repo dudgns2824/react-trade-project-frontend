@@ -1,18 +1,18 @@
-import axios from 'axios';
+import axios from "axios";
+import { store } from "../store";
+import { clearAccessToken } from "../store/auth/auth.slice";
 axios.defaults.timeout = 10000;
 
 const axiosClient = axios.create({
+    baseURL: process.env.REACT_APP_API_URL || "https://vboong.com",
     headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json',
-        AUTHORIZATION: 'Bearer ' + accessToken
+        "Content-Type": "application/json",
     },
-    withCredentials: true
-})
+});
 
 axiosClient.interceptors.request.use(
     (config) => {
-        const token = useAuthStore.getState().accessToken; // Zustand에서 토큰 가져오기
+        const token = store.getState().auth.accessToken;
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
@@ -24,9 +24,9 @@ axiosClient.interceptors.request.use(
 axiosClient.interceptors.response.use(
     (response) => response,
     (error) => {
-        if (error.response?.status === 401) {
+        if (error.response?.status === 401 || error.response?.status === 403) {
             console.warn("JWT 만료 - 로그아웃 처리");
-            useAuthStore.getState().clearAccessToken();
+            store.dispatch(clearAccessToken()); // Redux 상태 초기화
         }
         return Promise.reject(error);
     }
